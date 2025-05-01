@@ -1,11 +1,25 @@
 ---
-steps:
-  - name: Checkout repo
-    uses: actions/checkout@v2
-  - name: Run Prisma Cloud
-    id: prisma-cloud
-    uses: bridgecrewio/checkov-action@master
-    env:
-      PRISMA_API_URL: https://api2.prismacloud.io
-    with:
-      api-key: ${{ secrets.BC_API_KEY }}
+name: Prisma Cloud Checkov Scan and Upload
+
+on:
+  push:
+    branches:
+      - main
+      - master
+
+jobs:
+  scan:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Run Prisma Cloud Checkov
+        id: prisma-cloud
+        uses: bridgecrewio/checkov-action@master
+        env:
+          PRISMA_API_URL: ${{ vars.PRISMA_URL }}
+        with:
+          api-key: ${{ secrets.BC_API_KEY }}
+
+  
