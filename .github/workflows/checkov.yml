@@ -20,6 +20,6 @@ jobs:
         env:
           PRISMA_API_URL: ${{ vars.PRISMA_URL }}
         with:
-          api-key: ${{ secrets.BC_API_KEY }}
+          api-key: ${{ secrets.PRISMA_USERNAME }}::${{ secrets.PRISMA_PASSWORD}}
 
   
